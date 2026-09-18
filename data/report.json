@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-19 03:25:30",
+  "generated_at": "2026-09-19 03:29:04",
   "local_generated_at": "2026-09-19 03:25:18",
-  "remote_generated_at": "2026-09-19 03:25:30",
+  "remote_generated_at": "2026-09-19 03:29:04",
   "host": "SK-20250627TOPQ",
   "local": {
     "generated_at": "2026-09-19 03:25:18",
@@ -188,7 +188,7 @@
     ]
   },
   "remote": {
-    "generated_at": "2026-09-19 03:25:30",
+    "generated_at": "2026-09-19 03:29:04",
     "rows": [
       {
         "ch": "火山方舟",
@@ -288,9 +288,10 @@
         "quota": "按调用量计费",
         "url": "https://console.amap.com/dev/key/app",
         "note": "实测 info=OK infocode=10000",
-        "status": "失效",
-        "detail": "HTTP 0 URLError <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>",
-        "key_masked": "7cf8dcc0a6········9463b5"
+        "status": "有效",
+        "detail": "info=OK infocode=10000（本次网络不可达，沿用上次结果）",
+        "key_masked": "7cf8dcc0a6········9463b5",
+        "carried": true
       },
       {
         "ch": "Gitee",
@@ -300,9 +301,10 @@
         "quota": "用户 ren-junxue",
         "url": "https://gitee.com/profile/personal_access_tokens",
         "note": "注意过期时间与权限范围",
-        "status": "失效",
-        "detail": "HTTP 0 URLError <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>",
-        "key_masked": "6dfb788dfe········c56d0e"
+        "status": "有效",
+        "detail": "用户 ren-junxue（本次网络不可达，沿用上次结果）",
+        "key_masked": "6dfb788dfe········c56d0e",
+        "carried": true
       },
       {
         "ch": "Gitee",
@@ -312,9 +314,10 @@
         "quota": "用户 ren-junxue",
         "url": "https://gitee.com/profile/personal_access_tokens",
         "note": "与上一个令牌同一账号",
-        "status": "失效",
-        "detail": "HTTP 0 URLError <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>",
-        "key_masked": "59353c42f5········76b1f8"
+        "status": "有效",
+        "detail": "用户 ren-junxue（本次网络不可达，沿用上次结果）",
+        "key_masked": "59353c42f5········76b1f8",
+        "carried": true
       },
       {
         "ch": "GitHub",

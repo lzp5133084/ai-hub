@@ -8,7 +8,7 @@
 结果写入 data/remote.json。默认只输出脱敏密钥，
 设置环境变量 AIHUB_FULL_KEYS=1 才写入完整密钥。
 """
-import os, sys, json, ssl, hmac, hashlib, datetime, urllib.request, urllib.error, urllib.parse
+import os, sys, json, ssl, hmac, hashlib, time, datetime, urllib.request, urllib.error, urllib.parse
 from concurrent.futures import ThreadPoolExecutor
 
 try:
@@ -133,8 +133,10 @@ def check_minimax(key):
     if st in (200, 400):
         return '有效', 'HTTP %d 接口可连通（本次仅消耗 1 token）' % st, []
     if st in (401, 403):
-        return '失效', 'HTTP %d %s' % (st, body[:150]), []
-    return '未验证', 'HTTP %d %s' % (st, body[:150]), []
+        return '失效', 'HTTP %d 密钥无效或无权限' % st, []
+    if st == 0:
+        return '未验证', '网络不可达：%s' % body[:120], []
+    return '未验证', 'HTTP %d %s' % (st, body[:120]), []
 
 
 def check_amap(key):
@@ -145,7 +147,11 @@ def check_amap(key):
             return '有效', 'info=%s infocode=%s' % (j.get('info'), j.get('infocode')), []
         except Exception:
             return '有效', body[:120], []
-    return '失效', 'HTTP %d %s' % (st, body[:150]), []
+    if st == 0:
+        return '未验证', '网络不可达：%s' % body[:120], []
+    if st == 200:
+        return '失效', 'KEY 无效（INVALID_USER_KEY）', []
+    return '未验证', 'HTTP %d %s' % (st, body[:120]), []
 
 
 def check_gitee(key):
@@ -156,7 +162,11 @@ def check_gitee(key):
             return '有效', '用户 %s' % (j.get('login') or j.get('name') or ''), []
         except Exception:
             return '有效', body[:120], []
-    return '失效', 'HTTP %d %s' % (st, body[:150]), []
+    if st == 0:
+        return '未验证', '网络不可达：%s' % body[:120], []
+    if st in (401, 403):
+        return '失效', 'HTTP %d 令牌无效或已过期' % st, []
+    return '未验证', 'HTTP %d %s' % (st, body[:120]), []
 
 
 def check_github(key):
@@ -167,7 +177,11 @@ def check_github(key):
             return '有效', 'API 余量 %s/%s' % (core.get('remaining'), core.get('limit')), []
         except Exception:
             return '有效', body[:120], []
-    return '失效', 'HTTP %d %s' % (st, body[:150]), []
+    if st == 0:
+        return '未验证', '网络不可达：%s' % body[:120], []
+    if st in (401, 403):
+        return '失效', 'HTTP %d 令牌无效或权限不足' % st, []
+    return '未验证', 'HTTP %d %s' % (st, body[:120]), []
 
 
 CHECKERS = {'ark': check_ark, 'minimax': check_minimax, 'amap': check_amap,
@@ -284,12 +298,19 @@ def carry_prev(out, prev):
     if not prev:
         return out, 0
     n = 0
+    MARK = '（本次网络不可达，沿用上次结果）'
     prev_rows = {r.get('key_masked'): r for r in prev.get('rows', [])}
     for r in out['rows']:
         p = prev_rows.get(r.get('key_masked'))
-        if r.get('status') == '未验证' and p and p.get('status') in ('有效', '失效'):
+        if r.get('status') != '未验证' or not p:
+            continue
+        d = p.get('detail', '') or ''
+        # 上一次若是网络原因导致的结论，不作为基线
+        if '网络不可达' in d or 'HTTP 0' in d:
+            continue
+        if p.get('status') in ('有效', '失效'):
             r['status'] = p['status']
-            r['detail'] = p.get('detail', '') + '（本次网络不可达，沿用上次结果）'
+            r['detail'] = d.replace(MARK, '').strip() + MARK
             r['carried'] = True
             n += 1
     if not out.get('models') and prev.get('models'):
@@ -361,9 +382,26 @@ def main():
             if r.get('models'):
                 all_models = r['models'] if len(r['models']) > len(all_models) else all_models
 
+    # 网络抖动时，对“未验证”的项重试两轮
+    for attempt in range(2):
+        pending = [i for i, r in enumerate(rows) if r.get('status') == '未验证']
+        if not pending:
+            break
+        time.sleep(4)
+        with ThreadPoolExecutor(max_workers=4) as ex:
+            for i, r in zip(pending, ex.map(work, [items[i] for i in pending])):
+                rows[i] = r
+                if r.get('models'):
+                    all_models = r['models'] if len(r['models']) > len(all_models) else all_models
+
     ak = cfg.get('volc_ak', '')
     sk = cfg.get('volc_sk', '')
     billing = get_billing(ak, sk)
+    if billing.get('balance') is None and billing.get('error'):
+        time.sleep(3)
+        billing2 = get_billing(ak, sk)
+        if billing2.get('balance') is not None:
+            billing = billing2
 
     for r in rows:
         r.pop('models', None)

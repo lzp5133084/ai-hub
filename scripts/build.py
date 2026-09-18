@@ -58,7 +58,15 @@ def main():
     target = out or os.path.join(ROOT, 'index.html')
     with open(target, 'w', encoding='utf-8') as f:
         f.write(html)
-    print('[build] -> %s (%d bytes)' % (target, os.path.getsize(target)))
+    size = os.path.getsize(target)
+    mtime = datetime.datetime.fromtimestamp(os.path.getmtime(target)).strftime('%Y-%m-%d %H:%M:%S')
+    with open(target, encoding='utf-8') as f:
+        html = f.read()
+    html = (html.replace('__PAGE_SIZE__', '%.1f KB' % (size / 1024.0))
+                .replace('__PAGE_MTIME__', mtime))
+    with open(target, 'w', encoding='utf-8') as f:
+        f.write(html)
+    print('[build] -> %s (%d bytes)' % (target, size))
 
 
 if __name__ == '__main__':

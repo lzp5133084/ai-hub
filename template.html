@@ -13,6 +13,9 @@ body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Micr
 header{padding:26px 0 18px;border-bottom:1px solid var(--line)}
 h1{font-size:26px;margin:0 0 6px}
 .meta{color:var(--sub);font-size:13px}
+.badge{display:inline-block;margin:6px 0 2px;padding:6px 12px;border-radius:20px;font-size:12px;
+background:linear-gradient(135deg,rgba(91,140,255,.18),rgba(122,91,255,.18));
+border:1px solid rgba(91,140,255,.35);color:#c9d6ff}
 nav{position:sticky;top:0;z-index:20;background:rgba(15,18,24,.93);backdrop-filter:blur(8px);
 border-bottom:1px solid var(--line);display:flex;gap:6px;flex-wrap:wrap;padding:9px 0;margin-bottom:22px}
 nav a{color:var(--sub);text-decoration:none;font-size:13px;padding:5px 12px;border-radius:7px}
@@ -69,6 +72,7 @@ th{background:#eee;color:#000}table,th,td{border:1px solid #999}.snip pre{backgr
 <div class="wrap">
 <header>
   <h1>AI 资产总览 · 本地模型 + API 调用速查</h1>
+  <div class="badge">👤 作者：军哥懂保 ｜ 微信：xunijiayuan ｜ 页面大小：<b id="psize">__PAGE_SIZE__</b> ｜ 更新保存时间：<b id="pmtime">__PAGE_MTIME__</b></div>
   <div class="meta" id="hdrmeta"></div>
   <div class="btnbar">
     <button class="primary" onclick="exp.excel()">⬇ 导出 Excel (.xlsx)</button>
