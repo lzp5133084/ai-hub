@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19 03:23:16",
+  "generated_at": "2026-09-19 03:25:30",
   "rows": [
     {
       "ch": "火山方舟",
@@ -10,8 +10,9 @@
       "url": "https://console.volcengine.com/ark",
       "note": "资源ID apikey-20260701204241-sdkv9",
       "status": "有效",
-      "detail": "可调用模型 133 个",
-      "key_masked": "ark-cc8e7f········-10c62"
+      "detail": "可调用模型 133 个（本次网络不可达，沿用上次结果）",
+      "key_masked": "ark-cc8e7f········-10c62",
+      "carried": true
     },
     {
       "ch": "火山方舟",
@@ -22,8 +23,9 @@
       "url": "https://console.volcengine.com/ark",
       "note": "资源ID apikey-20260701203335-td28z",
       "status": "有效",
-      "detail": "可调用模型 133 个",
-      "key_masked": "ark-10b72b········-f3c92"
+      "detail": "可调用模型 133 个（本次网络不可达，沿用上次结果）",
+      "key_masked": "ark-10b72b········-f3c92",
+      "carried": true
     },
     {
       "ch": "火山方舟",
@@ -34,8 +36,9 @@
       "url": "https://console.volcengine.com/ark",
       "note": "资源ID apikey-20260621235856-sckvz",
       "status": "有效",
-      "detail": "可调用模型 133 个",
-      "key_masked": "ark-6af1e5········-d32c8"
+      "detail": "可调用模型 133 个（本次网络不可达，沿用上次结果）",
+      "key_masked": "ark-6af1e5········-d32c8",
+      "carried": true
     },
     {
       "ch": "火山方舟",
@@ -46,8 +49,9 @@
       "url": "https://console.volcengine.com/ark",
       "note": "资源ID apikey-20260620011420-6924t",
       "status": "有效",
-      "detail": "可调用模型 133 个",
-      "key_masked": "ark-649e21········-01f78"
+      "detail": "可调用模型 133 个（本次网络不可达，沿用上次结果）",
+      "key_masked": "ark-649e21········-01f78",
+      "carried": true
     },
     {
       "ch": "豆包（方舟）",
@@ -58,8 +62,9 @@
       "url": "https://console.volcengine.com/ark",
       "note": "与上方方舟 key 同账号",
       "status": "有效",
-      "detail": "可调用模型 133 个",
-      "key_masked": "4ec412b5-c········1c8de0"
+      "detail": "可调用模型 133 个（本次网络不可达，沿用上次结果）",
+      "key_masked": "4ec412b5-c········1c8de0",
+      "carried": true
     },
     {
       "ch": "豆包（方舟）",
@@ -70,8 +75,9 @@
       "url": "https://console.volcengine.com/ark",
       "note": "HTTP 401，密钥已失效",
       "status": "失效",
-      "detail": "HTTP 401 密钥无效或无权限",
-      "key_masked": "69f7bfbb-5········2e423c"
+      "detail": "HTTP 401 密钥无效或无权限（本次网络不可达，沿用上次结果）",
+      "key_masked": "69f7bfbb-5········2e423c",
+      "carried": true
     },
     {
       "ch": "MiniMax",
@@ -93,8 +99,8 @@
       "quota": "按调用量计费",
       "url": "https://console.amap.com/dev/key/app",
       "note": "实测 info=OK infocode=10000",
-      "status": "有效",
-      "detail": "info=OK infocode=10000",
+      "status": "失效",
+      "detail": "HTTP 0 URLError <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>",
       "key_masked": "7cf8dcc0a6········9463b5"
     },
     {
@@ -105,8 +111,8 @@
       "quota": "用户 ren-junxue",
       "url": "https://gitee.com/profile/personal_access_tokens",
       "note": "注意过期时间与权限范围",
-      "status": "有效",
-      "detail": "用户 ren-junxue",
+      "status": "失效",
+      "detail": "HTTP 0 URLError <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>",
       "key_masked": "6dfb788dfe········c56d0e"
     },
     {
@@ -117,8 +123,8 @@
       "quota": "用户 ren-junxue",
       "url": "https://gitee.com/profile/personal_access_tokens",
       "note": "与上一个令牌同一账号",
-      "status": "有效",
-      "detail": "用户 ren-junxue",
+      "status": "失效",
+      "detail": "HTTP 0 URLError <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>",
       "key_masked": "59353c42f5········76b1f8"
     },
     {
