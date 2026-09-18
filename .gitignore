@@ -1,0 +1,14 @@
+# 私钥 （绝对不要提交）
+config/keys.local.json
+config/github_token
+remote_full.json
+local-report.html
+report_local.json
+**/github_token
+
+# 日志与缓存
+logs/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

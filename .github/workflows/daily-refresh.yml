@@ -1,0 +1,47 @@
+name: daily-refresh
+on:
+  schedule:
+    - cron: '17 2 * * *'      # 每天 UTC 02:17（北京时间 10:17）自动重建并发布
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: 用已提交数据重建站点
+        env:
+          AIHUB_KEYS_JSON: ${{ secrets.AIHUB_KEYS_JSON }}
+        run: |
+          python scripts/build.py
+          if [ -n "$AIHUB_KEYS_JSON" ]; then
+            python scripts/remote_check.py
+            python scripts/build.py
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

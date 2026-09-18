@@ -1,0 +1,184 @@
+{
+  "generated_at": "2026-09-18 06:13:05",
+  "host": "SK-20250627TOPQ",
+  "user": "Administrator",
+  "services": [
+    {
+      "name": "Ollama",
+      "category": "本地大模型服务",
+      "version": "",
+      "location": "C:\\Users\\Administrator\\AppData\\Local\\Programs\\Ollama\\ollama.exe",
+      "data": "C:\\Users\\Administrator\\.ollama\\models",
+      "endpoint": "http://127.0.0.1:11434",
+      "api_base": "http://127.0.0.1:11434/v1（OpenAI 兼容）",
+      "status": "运行中",
+      "capability": "本地大模型推理：对话 / 补全 / 向量 Embedding / 多模态视觉 / OpenAI 兼容接口",
+      "invoke": "ollama run <模型>   或   POST http://127.0.0.1:11434/api/chat",
+      "note": "默认端口 11434；提供 /api/chat、/api/generate、/api/embeddings、/v1/* 四类接口"
+    },
+    {
+      "name": "stable-diffusion.cpp",
+      "category": "本地图像生成",
+      "version": "",
+      "location": "D:\\ai-tools\\sdcpp",
+      "data": "D:\\ai-tools\\sdcpp",
+      "endpoint": "http://127.0.0.1:7860",
+      "api_base": "sd-server.exe 启动后 http://127.0.0.1:7860",
+      "status": "已安装未启动",
+      "capability": "Stable Diffusion 文生图 / 图生图（GGML 版，CPU / Vulkan GPU 推理）",
+      "invoke": "D:\\ai-tools\\sdcpp\\sd-cli.exe -m D:\\ai-tools\\sdcpp\\sd15.safetensors -p \"提示词\" -o out.png",
+      "note": "含模型 sd15.safetensors(3.97GB)"
+    },
+    {
+      "name": "faster-whisper (CTranslate2)",
+      "category": "本地语音识别 ASR",
+      "version": "faster-whisper 1.2.1 / ctranslate2 4.8.2",
+      "location": "D:\\ai-tools\\Python311\\python.exe",
+      "data": "D:\\ai-tools\\whisper-models",
+      "endpoint": "无（Python 库直接调用，非 HTTP 服务）",
+      "api_base": "Python API：faster_whisper.WhisperModel",
+      "status": "运行中",
+      "capability": "离线语音转文字，支持中文，可选 tiny / base / small / medium 精度档",
+      "invoke": "D:\\ai-tools\\Python311\\python.exe 转写脚本.py",
+      "note": "可用模型档位：base、medium、small、tiny；缓存目录 C:\\Users\\Administrator\\.cache\\huggingface\\hub"
+    },
+    {
+      "name": "edge-tts",
+      "category": "本地语音合成 TTS",
+      "version": "edge-tts 7.2.8",
+      "location": "D:\\ai-tools\\Python311\\python.exe",
+      "data": "",
+      "endpoint": "无（Python 库）",
+      "api_base": "edge_tts.Communicate",
+      "status": "已安装未启动",
+      "capability": "文本转语音，支持 zh-CN-XiaoxiaoNeural 等中文多音色，输出 mp3 + 字幕",
+      "invoke": "D:\\ai-tools\\Python311\\python.exe -m edge_tts --voice zh-CN-XiaoxiaoNeural --text \"你好\" --write-media out.mp3",
+      "note": "无需密钥，联网调用微软 Edge 在线发音服务"
+    },
+    {
+      "name": "Wav2Lip",
+      "category": "本地数字人 / 对口型",
+      "version": "",
+      "location": "D:\\ai-tools\\Wav2Lip",
+      "data": "D:\\ai-tools\\Wav2Lip\\checkpoints",
+      "endpoint": "无（命令行脚本调用）",
+      "api_base": "inference.py",
+      "status": "已安装未启动",
+      "capability": "把任意音频与人物视频合成唇形同步视频（数字人口播、本地配音对口型）",
+      "invoke": "D:\\ai-tools\\Python311\\python.exe D:\\ai-tools\\Wav2Lip\\inference.py --checkpoint_path D:\\ai-tools\\Wav2Lip\\checkpoints\\wav2lip_gan.pth --face 人像.mp4 --audio 语音.wav --outfile out.mp4",
+      "note": "权重：.cache(0.00GB)、README.md(0.00GB)、wav2lip_gan.pth(0.41GB)；人脸检测 s3fd.pth 已就位"
+    }
+  ],
+  "ollama_models": [
+    {
+      "name": "moondream:1.8b",
+      "family": "phi2",
+      "params": "1B",
+      "quant": "Q4_0",
+      "size_gb": 1.62,
+      "ability": "视觉理解（图文对话）"
+    },
+    {
+      "name": "qwen2.5vl:3b",
+      "family": "qwen25vl",
+      "params": "3.8B",
+      "quant": "Q4_K_M",
+      "size_gb": 2.98,
+      "ability": "视觉理解（图文对话）"
+    },
+    {
+      "name": "qwen2.5:7b",
+      "family": "qwen2",
+      "params": "7.6B",
+      "quant": "Q4_K_M",
+      "size_gb": 4.36,
+      "ability": "文本对话 / 推理"
+    },
+    {
+      "name": "qwen3:4b",
+      "family": "qwen3",
+      "params": "4.0B",
+      "quant": "Q4_K_M",
+      "size_gb": 2.33,
+      "ability": "文本对话 / 推理"
+    },
+    {
+      "name": "llava:7b",
+      "family": "llama",
+      "params": "7B",
+      "quant": "Q4_0",
+      "size_gb": 4.41,
+      "ability": "视觉理解（图文对话）"
+    },
+    {
+      "name": "qwen3:1.7b",
+      "family": "qwen3",
+      "params": "2.0B",
+      "quant": "Q4_K_M",
+      "size_gb": 1.27,
+      "ability": "文本对话 / 推理"
+    }
+  ],
+  "ollama_running": [],
+  "sd_models": [
+    {
+      "file": "sd15.safetensors",
+      "size_gb": 3.97
+    }
+  ],
+  "whisper_models": [
+    "base",
+    "medium",
+    "small",
+    "tiny"
+  ],
+  "runtimes": [
+    {
+      "name": "Python 3.11 (便携版)",
+      "path": "D:\\ai-tools\\Python311\\python.exe",
+      "status": "已安装"
+    },
+    {
+      "name": "Python 3.12 (便携版)",
+      "path": "D:\\ai-tools\\Python312\\python.exe",
+      "status": "已安装"
+    },
+    {
+      "name": "Node.js 24",
+      "path": "D:\\ai-tools\\node24\\node.exe",
+      "status": "已安装"
+    },
+    {
+      "name": "openclaw (Node CLI)",
+      "path": "D:\\ai-tools\\node24\\openclaw.cmd",
+      "status": "已安装"
+    },
+    {
+      "name": "Chatbox 安装包",
+      "path": "D:\\ai-tools\\chatbox-setup.exe",
+      "status": "已安装"
+    }
+  ],
+  "ports": [
+    {
+      "port": 11434,
+      "service": "Ollama",
+      "open": true
+    },
+    {
+      "port": 7860,
+      "service": "stable-diffusion.cpp sd-server",
+      "open": false
+    },
+    {
+      "port": 1234,
+      "service": "LM Studio (未安装)",
+      "open": false
+    },
+    {
+      "port": 8188,
+      "service": "ComfyUI (未安装)",
+      "open": false
+    }
+  ]
+}

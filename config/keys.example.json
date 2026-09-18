@@ -1,0 +1,7 @@
+{
+  "volc_ak": "火山引擎 AccessKey ID（控制台 - 密钥管理 获取）",
+  "volc_sk": "火山引擎 SecretAccessKey",
+  "keys": [
+    {"ch": "示例-火山方舟", "type": "ark", "key": "ark-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxx", "fn": "大模型推理", "quota": "按量", "url": "https://console.volcengine.com/ark", "note": "type 支持：ark / minimax / amap / gitee / github"}
+  ]
+}

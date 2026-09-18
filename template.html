@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 资产总览 · 本地模型 + API 调用速查</title>
+<style>
+:root{--bg:#0f1218;--card:#181c25;--card2:#1f2430;--line:#2b3240;--txt:#e6e9ef;--sub:#98a2b8;
+--ok:#3ddc97;--err:#ff6b6b;--warn:#ffb454;--acc:#5b8cff;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft YaHei",-apple-system,sans-serif;line-height:1.6}
+.wrap{max-width:1320px;margin:0 auto;padding:0 20px 90px}
+header{padding:26px 0 18px;border-bottom:1px solid var(--line)}
+h1{font-size:26px;margin:0 0 6px}
+.meta{color:var(--sub);font-size:13px}
+nav{position:sticky;top:0;z-index:20;background:rgba(15,18,24,.93);backdrop-filter:blur(8px);
+border-bottom:1px solid var(--line);display:flex;gap:6px;flex-wrap:wrap;padding:9px 0;margin-bottom:22px}
+nav a{color:var(--sub);text-decoration:none;font-size:13px;padding:5px 12px;border-radius:7px}
+nav a:hover{background:var(--card2);color:#fff}
+.btnbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+button{cursor:pointer;border:1px solid var(--line);background:var(--card2);color:var(--txt);
+padding:9px 15px;border-radius:8px;font-size:13px;transition:.15s}
+button:hover{border-color:var(--acc);color:#fff;transform:translateY(-1px)}
+button.primary{background:linear-gradient(135deg,#5b8cff,#7a5bff);border:none;font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:13px;margin:18px 0 26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px}
+.card .n{font-size:23px;font-weight:700}
+.card .l{color:var(--sub);font-size:12px;margin-top:2px}
+.ok{color:var(--ok)}.err{color:var(--err)}.warn{color:var(--warn)}.acc{color:var(--acc)}
+h2{font-size:18px;margin:34px 0 12px;display:flex;align-items:center;gap:9px}
+h2::before{content:"";width:4px;height:17px;background:var(--acc);border-radius:2px}
+h2 .tail{font-size:12px;color:var(--sub);font-weight:400}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+input[type=search]{flex:1;min-width:200px;background:var(--card2);border:1px solid var(--line);
+border-radius:8px;padding:9px 12px;color:var(--txt);font-size:13px}
+select{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;color:var(--txt);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);border-radius:10px;overflow:hidden}
+th{background:var(--card2);text-align:left;padding:11px 12px;font-weight:600;color:var(--sub);
+border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#1c2230}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600}
+.t-ok{background:rgba(61,220,151,.14);color:var(--ok)}
+.t-err{background:rgba(255,107,107,.14);color:var(--err)}
+.t-warn{background:rgba(255,180,84,.14);color:var(--warn)}
+code{font-family:Consolas,monospace;font-size:12px}
+code.key{background:#0b0e14;padding:2px 6px;border-radius:5px;color:#8fb3ff;word-break:break-all;cursor:pointer}
+a{color:#7aa2ff;text-decoration:none}a:hover{text-decoration:underline}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:13px}
+.list{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+.list h3{margin:0 0 7px;font-size:14px}
+.list .item{font-family:Consolas,monospace;font-size:12px;color:var(--sub);padding:3px 0;border-bottom:1px dashed #262d3a}
+.snip{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden}
+.snip .hd{display:flex;justify-content:space-between;align-items:center;background:var(--card2);padding:9px 14px;font-size:13px}
+.snip .hd .t{font-weight:600}
+.snip .hd .d{color:var(--sub);font-size:12px}
+.snip pre{margin:0;padding:14px;overflow-x:auto;font-size:12.5px;line-height:1.65;color:#cdd6e6}
+.snip button{font-size:12px;padding:5px 11px}
+.note{background:rgba(255,180,84,.08);border:1px solid rgba(255,180,84,.3);border-radius:10px;padding:14px 16px;font-size:13px;color:#e8d9bd}
+.note ul{margin:6px 0 0;padding-left:20px}
+.foot{margin-top:34px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);padding-top:14px}
+.empty{color:var(--sub);font-size:13px;padding:14px;background:var(--card);border-radius:10px;border:1px dashed var(--line)}
+@media print{body{background:#fff;color:#000}nav,.toolbar,.btnbar{display:none}
+th{background:#eee;color:#000}table,th,td{border:1px solid #999}.snip pre{background:#f5f5f5;color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>AI 资产总览 · 本地模型 + API 调用速查</h1>
+  <div class="meta" id="hdrmeta"></div>
+  <div class="btnbar">
+    <button class="primary" onclick="exp.excel()">⬇ 导出 Excel (.xlsx)</button>
+    <button onclick="exp.csv()">⬇ 导出 CSV（密钥表）</button>
+    <button onclick="toggleKeys()" id="keybtn">👁 显示/隐藏密钥</button>
+    <button onclick="window.print()">🖨 打印 / 存 PDF</button>
+  </div>
+</header>
+
+<nav>
+  <a href="#s1">本地服务</a><a href="#s2">本地模型</a><a href="#s3">在线 API 密钥</a>
+  <a href="#s4">方舟模型</a><a href="#s5">调用速查</a><a href="#s6">账单</a>
+</nav>
+
+<div class="cards" id="cards"></div>
+
+<h2 id="s1">一、本地搭好的模型与应用</h2>
+<div id="svcTable"></div>
+
+<h2 id="s2">二、本地模型清单</h2>
+<div id="localModel"></div>
+
+<h2 id="s3">三、在线 API 密钥总览 <span class="tail" id="remoteTS"></span></h2>
+<div class="toolbar">
+  <input type="search" id="q" placeholder="搜索渠道 / 用途 / 备注…" oninput="renderKeys()">
+  <select id="f" onchange="renderKeys()">
+    <option value="">全部状态</option><option value="有效">仅有效</option>
+    <option value="失效">仅失效</option><option value="未验证">仅未验证</option>
+  </select>
+</div>
+<div id="keyTable"></div>
+
+<h2 id="s4">四、在线方舟模型能力清单 <span class="tail" id="modelCnt"></span></h2>
+<div class="grid2" id="remoteModels"></div>
+
+<h2 id="s5">五、调用示例速查</h2>
+<div class="meta" style="margin-bottom:12px">所有代码块右上角按钮可直接复制。示例中的模型名会自动取你本机实际装的模型。</div>
+<div id="snippets"></div>
+
+<h2 id="s6">六、火山引擎账户财务</h2>
+<div class="cards" id="billCards"></div>
+<div id="billTable"></div>
+
+<h2>七、处理建议</h2>
+<div class="note" id="advice"></div>
+
+<div class="foot" id="foot"></div>
+</div>
+
+<script>
+var REPORT = __REPORT_DATA__;
+var L = REPORT.local || {}, R = REPORT.remote || {};
+var showFull = false;
+
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function hasFullKey(){return R.full_keys===true;}
+function keyCell(r){
+  var k = r.key_masked||r.key;
+  var full = r.key;
+  var shown = (showFull && hasFullKey()) ? full : (r.key_masked||mask(full));
+  if(!hasFullKey()) shown = r.key_masked||mask(full);
+  return "<code class='key' onclick='cp(this)' title='点击复制'>"+esc(shown)+"</code>";
+}
+function mask(k){return (!k||k.length<14)?k:k.slice(0,10)+"········"+k.slice(-6);}
+function cls(st){return st=="有效"?"t-ok":(st=="失效"?"t-err":"t-warn");}
+function cp(el){
+  navigator.clipboard.writeText(el.textContent).then(function(){
+    var o=el.style.color;el.style.color="#3ddc97";setTimeout(function(){el.style.color=o;},600);});
+}
+function toggleKeys(){
+  if(!hasFullKey()){alert("当前为云端脱敏版本，完整密钥仅保存在本机私有报告里。\n本机运行 scripts\\run_daily.py 生成的 local-report.html 含完整密钥。");return;}
+  showFull=!showFull;renderKeys();
+}
+
+/* ---------- 卡片 ---------- */
+function renderCards(){
+  var svc=(L.services||[]), models=(L.ollama_models||[]), rows=(R.rows||[]);
+  function cnt(s,st){return rows.filter(function(r){return r.status==st;}).length;}
+  var running=svc.filter(function(s){return s.status=="运行中";}).length;
+  var c=[
+   ["本地服务 "+running+"/"+svc.length,"已搭建，当前运行中 "+running+" 个","acc"],
+   ["本地模型 "+models.length,"Ollama 已下载模型","ok"],
+   ["在线密钥 "+rows.length,"已收录并逐项实测",""],
+   ["有效 "+cnt(0,"有效"),"实测通过","ok"],
+   ["失效 "+cnt(0,"失效"),"需处理","err"],
+   ["方舟模型 "+(R.model_count||0),"同一账号可用模型数",""],
+   ["余额 "+(R.billing&&R.billing.balance!=null?R.billing.balance:"-"),"火山账户可用余额（CNY）","warn"]
+  ];
+  document.getElementById('cards').innerHTML=c.map(function(x){
+    return "<div class='card'><div class='n "+x[2]+"'>"+esc(x[0])+"</div><div class='l'>"+esc(x[1])+"</div></div>";}).join("");
+  document.getElementById('hdrmeta').innerHTML=
+    "生成本地数据：<b>"+esc(L.generated_at||'-')+"</b> ｜ 在线检测：<b>"+esc(R.generated_at||'-')+
+    "</b> ｜ 机器："+esc(L.host||'-')+"/"+esc(L.user||'-')+
+    " ｜ 每日自动检测一次（本地计划任务扫描 → 推送 GitHub → Pages 自动发布）"+
+    (hasFullKey()?"":" ｜ <span class='warn'>当前为脱敏版</span>");
+}
+
+/* ---------- 本地服务 ---------- */
+function renderSvc(){
+  var a=(L.services||[]);
+  if(!a.length){document.getElementById('svcTable').innerHTML="<div class='empty'>未检测到本地服务</div>";return;}
+  var h="<table><thead><tr><th style='width:150px'>名称</th><th style='width:88px'>状态</th><th>能力</th>"+
+    "<th style='width:210px'>调用地址 / 接口</th><th style='width:250px'>位置</th><th style='width:230px'>备注</th></tr></thead><tbody>";
+  a.forEach(function(s){
+    var t=s.status=="运行中"?"t-ok":(s.status=="已安装未启动"?"t-warn":"t-err");
+    h+="<tr><td><b>"+esc(s.name)+"</b><div class='meta' style='font-size:11px'>"+esc(s.category)+"</div></td>"+
+       "<td><span class='tag "+t+"'>"+esc(s.status)+"</span></td><td>"+esc(s.capability)+"</td>"+
+       "<td><code>"+esc(s.endpoint)+"</code><div class='meta' style='font-size:11px'>"+esc(s.api_base)+"</div></td>"+
+       "<td style='font-size:11.5px'>"+esc(s.location)+"</td><td style='font-size:11.5px'>"+esc(s.note)+"</td></tr>";
+  });
+  document.getElementById('svcTable').innerHTML=h+"</tbody></table>";
+}
+
+/* ---------- 本地模型 ---------- */
+function renderLocalModel(){
+  var m=(L.ollama_models||[]), run=(L.ollama_running||[]), sd=(L.sd_models||[]), wh=(L.whisper_models||[]);
+  var h="";
+  if(m.length){
+    h+="<h3 style='font-size:14px;margin:0 0 8px'>Ollama 模型（"+m.length+"）</h3><table><thead><tr>"+
+      "<th style='width:200px'>模型</th><th style='width:110px'>参数</th><th style='width:110px'>量化</th>"+
+      "<th style='width:90px'>体积</th><th style='width:180px'>能力</th><th>调用命令</th></tr></thead><tbody>";
+    m.forEach(function(x){
+      h+="<tr><td><b>"+esc(x.name)+"</b></td><td>"+esc(x.params)+"</td><td>"+esc(x.quant)+"</td>"+
+         "<td>"+x.size_gb+" GB</td><td>"+esc(x.ability)+"</td>"+
+         "<td><code>ollama run "+esc(x.name)+"</code></td></tr>";
+    });
+    h+="</tbody></table>";
+    if(run.length) h+="<div class='meta' style='margin-top:8px'>当前已加载驻留显存："+esc(run.join('、'))+"</div>";
+    else h+="<div class='meta' style='margin-top:8px'>当前无模型驻留（空闲，首次调用会自动加载）</div>";
+  } else h+="<div class='empty'>Ollama 未运行或无模型</div>";
+  var extra="";
+  if(sd.length) extra+="<div class='list'><h3>stable-diffusion.cpp 模型文件</h3>"+
+    sd.map(function(x){return "<div class='item'>"+esc(x.file)+"  "+x.size_gb+" GB</div>";}).join("")+"</div>";
+  if(wh.length) extra+="<div class='list'><h3>faster-whisper 本地模型</h3>"+
+    wh.map(function(x){return "<div class='item'>"+esc(x)+"</div>";}).join("")+"</div>";
+  var rt=(L.runtimes||[]);
+  if(rt.length) extra+="<div class='list'><h3>运行时 / 组件</h3>"+
+    rt.map(function(x){return "<div class='item'>"+esc(x.name)+" — <span class='"+(x.status=='已安装'?'ok':'err')+"'>"+esc(x.status)+"</span></div>";}).join("")+"</div>";
+  var po=(L.ports||[]);
+  if(po.length) extra+="<div class='list'><h3>端口探测</h3>"+
+    po.map(function(x){return "<div class='item'>"+x.port+" ("+esc(x.service)+") — <span class='"+(x.open?'ok':'')+"'>"+(x.open?"开放":"未开放")+"</span></div>";}).join("")+"</div>";
+  document.getElementById('localModel').innerHTML=h+"<div class='grid2' style='margin-top:14px'>"+extra+"</div>";
+}
+
+/* ---------- 在线密钥 ---------- */
+function renderKeys(){
+  var q=(document.getElementById('q').value||'').toLowerCase();
+  var f=document.getElementById('f').value;
+  var rows=(R.rows||[]);
+  var h="<table><thead><tr><th style='width:130px'>渠道</th><th style='width:250px'>密钥</th><th style='width:70px'>状态</th>"+
+    "<th style='width:250px'>功能</th><th style='width:170px'>额度/余量</th><th style='width:200px'>管理地址</th><th>备注</th></tr></thead><tbody>";
+  var n=0;
+  rows.forEach(function(r){
+    if(f && r.status!=f) return;
+    if(q && (r.ch+r.fn+r.note+r.quota).toLowerCase().indexOf(q)<0) return;
+    n++;
+    h+="<tr><td><b>"+esc(r.ch)+"</b></td><td>"+keyCell(r)+
+       "<div class='meta' style='font-size:11px;margin-top:3px'>"+esc(r.detail||'')+"</div></td>"+
+       "<td><span class='tag "+cls(r.status)+"'>"+esc(r.status)+"</span></td><td>"+esc(r.fn)+"</td>"+
+       "<td>"+esc(r.quota)+"</td><td><a href='"+esc(r.url)+"' target='_blank'>"+esc(String(r.url||'').replace('https://',''))+"</a></td>"+
+       "<td style='font-size:11.5px'>"+esc(r.note)+"</td></tr>";
+  });
+  document.getElementById('keyTable').innerHTML=(h+"</tbody></table>")+(n?"":"<div class='empty'>无匹配结果</div>");
+  document.getElementById('remoteTS').textContent="检测于 "+(R.generated_at||'-')+"，共 "+rows.length+" 项";
+}
+
+/* ---------- 方舟模型 ---------- */
+function renderRemoteModels(){
+  var cats=R.models||{}, cnt=0, h="";
+  for(var c in cats){
+    var arr=cats[c]; cnt+=arr.length;
+    h+="<div class='list'><h3>"+esc(c)+" <span class='meta'>("+arr.length+")</span></h3>"+
+       arr.map(function(m){return "<div class='item'>"+esc(m)+"</div>";}).join("")+"</div>";
+  }
+  document.getElementById('remoteModels').innerHTML=h||"<div class='empty'>本次未在云端取到模型清单</div>";
+  document.getElementById('modelCnt').textContent="共 "+cnt+" 个模型，按能力分为 "+(Object.keys(cats).length)+" 类";
+}
+
+/* ---------- 调用速查 ---------- */
+function pickModel(kind){
+  var m=(L.ollama_models||[]).map(function(x){return x.name;});
+  if(!m.length) return kind==='vision'?'qwen2.5vl:3b':'qwen3:4b';
+  if(kind==='vision'){
+    for(var i=0;i<m.length;i++){if(/vl|llava|moondream|vision/i.test(m[i]))return m[i];}
+  }
+  if(kind==='small'){
+    m.sort(function(a,b){return a.length-b.length;});
+    return m[0];
+  }
+  return m[0];
+}
+function snippets(){
+  var om=pickModel('text'), vm=pickModel('vision'), sm=pickModel('small');
+  var cfg=(R.rows||[]);
+  function find(ch){for(var i=0;i<cfg.length;i++){if(cfg[i].ch.indexOf(ch)>=0)return cfg[i];}return null;}
+  var ark=find('火山方舟'), mm=find('MiniMax'), gh=find('GitHub'), gt=find('Gitee'), am=find('高德');
+  function keyOf(x){ if(!x) return '你的密钥'; if(hasFullKey()) return x.key; return (x.key_masked||mask(x.key)); }
+  var out=[
+   ["Ollama · 对话（OpenAI 兼容，最推荐）","python","本机 "+om,
+"from openai import OpenAI\n\nclient = OpenAI(\n    base_url='http://127.0.0.1:11434/v1',\n    api_key='ollama'          # 本地无需真实密钥\n)\n\nresp = client.chat.completions.create(\n    model='"+om+"',\n    messages=[{'role':'user','content':'用一句话介绍你自己'}],\n    stream=False\n)\nprint(resp.choices[0].message.content)"],
+   ["Ollama · 原生接口 /api/chat（无需依赖库）","bash","命令行直接调用",
+"curl http://127.0.0.1:11434/api/chat -d '{\n  \"model\": \""+om+"\",\n  \"stream\": false,\n  \"messages\": [{\"role\":\"user\",\"content\":\"你好\"}]\n}'"],
+   ["Ollama · 流式生成 /api/generate","bash","适合打字机效果",
+"curl http://127.0.0.1:11434/api/generate -d '{\n  \"model\": \""+sm+"\",\n  \"prompt\": \"写一段关于秋天的短文\",\n  \"stream\": true\n}'"],
+   ["Ollama · 向量 Embedding（做 RAG 要用）","python","向量化文本",
+"import urllib.request, json\n\ndef embed(texts, model='"+om+"'):\n    body = json.dumps({'model': model, 'input': texts}).encode()\n    req = urllib.request.Request('http://127.0.0.1:11434/api/embed',\n                                 data=body, headers={'Content-Type':'application/json'})\n    return json.loads(urllib.request.urlopen(req, timeout=60).read())['embeddings']\n\nvec = embed(['第一段文本','第二段文本'])\nprint(len(vec), len(vec[0]))   # 条数, 向量维度"],
+   ["Ollama · 多模态视觉理解（图片问答）","python","使用本机视觉模型 "+vm,
+"import urllib.request, json, base64\n\nimg = base64.b64encode(open('test.jpg','rb').read()).decode()\npayload = json.dumps({\n    'model': '"+vm+"',\n    'stream': False,\n    'messages': [{'role':'user','content':'这张图里有什么？','images':[img]}]\n}).encode()\nreq = urllib.request.Request('http://127.0.0.1:11434/api/chat', data=payload,\n                             headers={'Content-Type':'application/json'})\nprint(json.loads(urllib.request.urlopen(req, timeout=180).read())['message']['content'])"],
+   ["stable-diffusion.cpp · 文生图","bash","本地出图，无需联网",
+"D:\\ai-tools\\sdcpp\\sd-cli.exe ^\n  -m D:\\ai-tools\\sdcpp\\sd15.safetensors ^\n  -p \"a cute cat wearing sunglasses, high quality\" ^\n  --steps 20 -W 512 -H 512 ^\n  -o D:\\ai-tools\\sdcpp\\out.png"],
+   ["stable-diffusion.cpp · 启动本地出图服务","bash","起 HTTP 服务后可调接口",
+"D:\\ai-tools\\sdcpp\\sd-server.exe -m D:\\ai-tools\\sdcpp\\sd15.safetensors\n:: 默认监听 http://127.0.0.1:7860"],
+   ["faster-whisper · 本地语音转文字","python","离线 ASR，支持中文",
+"from faster_whisper import WhisperModel\n\nmodel = WhisperModel('small', device='cpu', compute_type='int8')\nsegments, info = model.transcribe('audio.mp3', language='zh', beam_size=5)\nprint('识别语言:', info.language, ' 概率:', info.language_probability)\nfor s in segments:\n    print('[%.2fs -> %.2fs] %s' % (s.start, s.end, s.text))"],
+   ["edge-tts · 本地文字转语音","bash","无需密钥的中文 TTS",
+"D:\\ai-tools\\Python311\\python.exe -m edge_tts ^\n  --voice zh-CN-XiaoxiaoNeural ^\n  --text \"你好，这是本地合成的语音\" ^\n  --write-media out.mp3 --write-subtitles out.vtt"],
+   ["Wav2Lip · 数字人对口型","bash","音频 + 人像视频 → 唇形同步视频",
+"D:\\ai-tools\\Python311\\python.exe D:\\ai-tools\\Wav2Lip\\inference.py ^\n  --checkpoint_path D:\\ai-tools\\Wav2Lip\\checkpoints\\wav2lip_gan.pth ^\n  --face D:\\ai-tools\\Wav2Lip\\portrait.jpg ^\n  --audio D:\\ai-tools\\Wav2Lip\\tts_test.wav ^\n  --outfile D:\\ai-tools\\Wav2Lip\\results\\out.mp4"],
+   ["火山方舟 · OpenAI 兼容调用","python","在线大模型（133 个模型）",
+"from openai import OpenAI\n\nclient = OpenAI(\n    base_url='https://ark.cn-beijing.volces.com/api/v3',\n    api_key='"+keyOf(ark)+"'\n)\nresp = client.chat.completions.create(\n    model='doubao-seed-1-6-250615',\n    messages=[{'role':'user','content':'你好'}]\n)\nprint(resp.choices[0].message.content)"],
+   ["火山方舟 · 拉取可用模型清单","bash","随时查看你能调用哪些模型",
+"curl https://ark.cn-beijing.volces.com/api/v3/models \\\n  -H \"Authorization: Bearer "+keyOf(ark)+"\""],
+   ["MiniMax · 文本对话","python","在线备用大模型",
+"import urllib.request, json\n\nbody = json.dumps({'model':'MiniMax-Text-01',\n    'messages':[{'role':'user','content':'你好'}],'max_tokens':64}).encode()\nreq = urllib.request.Request('https://api.minimax.chat/v1/text/chatcompletion_v2', data=body,\n    headers={'Authorization':'Bearer "+keyOf(mm)+"','Content-Type':'application/json'})\nprint(urllib.request.urlopen(req, timeout=30).read().decode('utf-8'))"],
+   ["GitHub API · 查询余额/仓库","bash","每小时 5000 次额度",
+"curl -H \"Authorization: token "+keyOf(gh)+"\" https://api.github.com/rate_limit\ncurl -H \"Authorization: token "+keyOf(gh)+"\" https://api.github.com/user/repos?per_page=100"],
+   ["Gitee API · 查询用户/仓库","bash","码云仓库读写",
+"curl \"https://gitee.com/api/v5/user?access_token="+keyOf(gt)+"\"\ncurl \"https://gitee.com/api/v5/user/repos?access_token="+keyOf(gt)+"&per_page=100\""],
+   ["高德地图 · IP 定位 / 地理编码","bash","Web 服务 API",
+"curl \"https://restapi.amap.com/v3/ip?key="+keyOf(am)+"&ip=114.247.50.2\"\ncurl \"https://restapi.amap.com/v3/geocode/geo?key="+keyOf(am)+"&address=北京市朝阳区\""],
+   ["代理环境说明","bash","本机 Clash Verge 已在跑",
+"# 本机 Clash Verge 混合端口：127.0.0.1:7897\n# 命令行走代理（PowerShell）：\n$env:HTTPS_PROXY='http://127.0.0.1:7897'; $env:HTTP_PROXY='http://127.0.0.1:7897'\n# Python requests：\n# requests.get(url, proxies={'https':'http://127.0.0.1:7897'})"]
+  ];
+  return out;
+}
+var SNIPS=null;
+function renderSnippets(){
+  if(!SNIPS) SNIPS=snippets();
+  document.getElementById('snippets').innerHTML=SNIPS.map(function(s,i){
+    return "<div class='snip'><div class='hd'><div><div class='t'>"+esc(s[0])+
+      "</div><div class='d'>"+esc(s[2])+"</div></div>"+
+      "<button onclick='cpPre("+i+")'>复制</button></div><pre id='pre"+i+"'>"+esc(s[3])+"</pre></div>";
+  }).join("");
+}
+function cpPre(i){cp(document.getElementById('pre'+i));}
+
+/* ---------- 账单 ---------- */
+function renderBill(){
+  var b=R.billing||{};
+  document.getElementById('billCards').innerHTML=[
+    [b.balance!=null?('¥'+b.balance):'-','可用余额 / 现金余额','ok'],
+    [b.frozen!=null?('¥'+b.frozen):'-','冻结金额',''],
+    [b.credit!=null?('¥'+b.credit):'-','信用额度',''],
+    [(b.months||[]).length?('¥'+(b.months[1]||{}).amount):'-','上月应付金额','warn']
+  ].map(function(x){return "<div class='card'><div class='n "+x[2]+"'>"+esc(x[0])+"</div><div class='l'>"+esc(x[1])+"</div></div>";}).join("");
+  var h="<table><thead><tr><th style='width:140px'>账单周期</th><th style='width:150px'>应付金额(CNY)</th><th>说明</th></tr></thead><tbody>";
+  (b.months||[]).forEach(function(m){
+    h+="<tr><td>"+esc(m.period)+"</td><td>"+esc(m.amount)+"</td><td>"+esc(m.desc)+"</td></tr>";
+  });
+  document.getElementById('billTable').innerHTML=( b.months? h+"</tbody></table>" : "<div class='empty'>未取到账单（本机版运行后可见）</div>");
+}
+
+/* ---------- 建议 ---------- */
+function renderAdvice(){
+  var bad=(R.rows||[]).filter(function(r){return r.status!='有效';});
+  var h="<ul>";
+  h+="<li><b>本地优先</b>：本机 Ollama 已装 "+((L.ollama_models||[]).length)+" 个模型，"+
+      "日常对话/摘要/向量化建议直接走 <code>http://127.0.0.1:11434/v1</code>，零成本、无额度限制。</li>";
+  h+="<li><b>本地出图</b>：stable-diffusion.cpp + sd15.safetensors 已在本地，批量出图不花钱。</li>";
+  h+="<li><b>本地语音</b>：faster-whisper 做识别（tiny/base/small 已在本地缓存），edge-tts 做合成，二者组合可完全离线做配音。</li>";
+  h+="<li><b>视频口型</b>：edge-tts 生成音频 → Wav2Lip 合成唇形视频，可搭一套全自动口播流水线。</li>";
+  if(bad.length){
+    h+="<li><b class='err'>需处理密钥</b>："+bad.map(function(r){return esc(r.ch)+"（"+esc(r.status)+"）";}).join("、")+
+       "，建议到对应控制台重新生成或删除。</li>";
+  }
+  h+="<li><b>安全</b>：密钥明文不要进 Git；本站已做脱敏，完整密钥只存在本机 <code>local-report.html</code> 与 <code>config/keys.local.json</code>（已 gitignore）。</li>";
+  h+="<li><b>余额</b>：火山账户按当前月消费估算，余额不足时优先切本地模型。</li>";
+  h+="</ul>";
+  document.getElementById('advice').innerHTML=h;
+  document.getElementById('foot').innerHTML=
+    "本报告由本地脚本自动生成并每日刷新：scripts\\local_scan.py（本机模型/服务）+ scripts\\remote_check.py（在线 API 与账单）<br>"+
+    "仓库：https://github.com/lzp5133084/ai-hub ｜ 在线版每日由 GitHub Actions 重新构建发布";
+}
+
+/* ---------- 导出 ---------- */
+function csvEsc(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"';}
+function dl(blob,name){var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+  a.click();setTimeout(function(){URL.revokeObjectURL(a.href);},3000);}
+
+var exp={
+  sheets:function(){
+    var S={};
+    S['本地服务']=[['名称','分类','状态','能力','调用地址','接口','位置','备注，调用命令']]
+      .concat((L.services||[]).map(function(s){
+        return [s.name,s.category,s.status,s.capability,s.endpoint,s.api_base,s.location,s.note,s.invoke];}));
+    S['本地模型']=[['来源','模型','参数','量化','体积(GB)','能力']].concat(
+      (L.ollama_models||[]).map(function(m){return ['Ollama',m.name,m.params,m.quant,m.size_gb,m.ability];}))
+      .concat((L.sd_models||[]).map(function(m){return ['stable-diffusion.cpp',m.file,'','',m.size_gb,'文生图'];}))
+      .concat((L.whisper_models||[]).map(function(m){return ['faster-whisper',m,'','','','语音识别'];}));
+    S['API密钥']=[['渠道','密钥','状态','功能','额度/余量','检测结果','管理地址','备注']]
+      .concat((R.rows||[]).map(function(r){
+        return [r.ch,(hasFullKey()?r.key:(r.key_masked||mask(r.key))),r.status,r.fn,r.quota,r.detail,r.url,r.note];}));
+    var sm=[['能力分类','模型ID']];
+    for(var c in (R.models||{})){(R.models[c]||[]).forEach(function(m){sm.push([c,m]);});}
+    S['方舟模型']=sm;
+    S['账单']=[['账单周期','应付金额(CNY)','说明']].concat(
+      ((R.billing||{}).months||[]).map(function(m){return [m.period,m.amount,m.desc];}));
+    S['调用示例']=[['场景','语言','说明','代码']].concat(SNIPS.map(function(s){return [s[0],s[1],s[2],s[3]];}));
+    return S;
+  },
+  excel:function(){
+    function go(){
+      var wb=XLSX.utils.book_new(), S=exp.sheets();
+      for(var n in S){
+        var ws=XLSX.utils.aoa_to_sheet(S[n]);
+        ws['!cols']=[{wch:18},{wch:12},{wch:12},{wch:40},{wch:34},{wch:34},{wch:38},{wch:34}];
+        XLSX.utils.book_append_sheet(wb,ws,n);
+      }
+      XLSX.writeFile(wb,'AI资产总览_'+(REPORT.generated_at||'').slice(0,10)+'.xlsx');
+    }
+    if(window.XLSX){go();return;}
+    var s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+    s.onload=go; s.onerror=exp.xlsFallback; document.head.appendChild(s);
+  },
+  xlsFallback:function(){
+    function tbl(rows){var h="<table border='1'><tr>";
+      rows[0].forEach(function(c){h+="<th style='background:#DDEBF7;font-weight:bold'>"+esc(c)+"</th>";});
+      h+="</tr>";
+      for(var i=1;i<rows.length;i++){h+="<tr>";rows[i].forEach(function(c){h+="<td>"+esc(c)+"</td>";});h+="</tr>";}
+      return h+"</table>";}
+    var S=exp.sheets(), html="<html xmlns:x='urn:schemas-microsoft-com:office:excel'><head><meta charset='UTF-8'></head><body>";
+    for(var n in S){html+="<h3>"+esc(n)+"</h3>"+tbl(S[n]);}
+    html+="</body></html>";
+    dl(new Blob(["\ufeff"+html],{type:'application/vnd.ms-excel;charset=utf-8'}),'AI资产总览.xls');
+  },
+  csv:function(){
+    var rows=exp.sheets()['API密钥'];
+    var txt=rows.map(function(r){return r.map(csvEsc).join(',');}).join('\r\n');
+    dl(new Blob(["\ufeff"+txt],{type:'text/csv;charset=utf-8'}),'API密钥表_'+(REPORT.generated_at||'').slice(0,10)+'.csv');
+  }
+};
+
+SNIPS=snippets();
+renderCards();renderSvc();renderLocalModel();renderKeys();
+renderRemoteModels();renderSnippets();renderBill();renderAdvice();
+if(!hasFullKey()){document.getElementById('keybtn').textContent='👁 云端版为脱敏密钥';}
+</script>
+</body>
+</html>
