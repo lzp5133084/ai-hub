@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-09-19 09:00:12",
-  "local_generated_at": "2026-09-19 09:00:02",
-  "remote_generated_at": "2026-09-19 09:00:12",
+  "generated_at": "2026-09-20 09:02:16",
+  "local_generated_at": "2026-09-20 09:00:03",
+  "remote_generated_at": "2026-09-20 09:02:16",
   "host": "SK-20250627TOPQ",
   "local": {
-    "generated_at": "2026-09-19 09:00:02",
+    "generated_at": "2026-09-20 09:00:03",
     "host": "SK-20250627TOPQ",
     "user": "Administrator",
     "services": [
@@ -16,7 +16,7 @@
         "data": "C:\\Users\\Administrator\\.ollama\\models",
         "endpoint": "http://127.0.0.1:11434",
         "api_base": "http://127.0.0.1:11434/v1（OpenAI 兼容）",
-        "status": "运行中",
+        "status": "已安装未启动",
         "capability": "本地大模型推理：对话 / 补全 / 向量 Embedding / 多模态视觉 / OpenAI 兼容接口",
         "invoke": "ollama run <模型>   或   POST http://127.0.0.1:11434/api/chat",
         "note": "默认端口 11434；提供 /api/chat、/api/generate、/api/embeddings、/v1/* 四类接口"
@@ -74,56 +74,7 @@
         "note": "权重：.cache(0.00GB)、README.md(0.00GB)、wav2lip_gan.pth(0.41GB)；人脸检测 s3fd.pth 已就位"
       }
     ],
-    "ollama_models": [
-      {
-        "name": "moondream:1.8b",
-        "family": "phi2",
-        "params": "1B",
-        "quant": "Q4_0",
-        "size_gb": 1.62,
-        "ability": "视觉理解（图文对话）"
-      },
-      {
-        "name": "qwen2.5vl:3b",
-        "family": "qwen25vl",
-        "params": "3.8B",
-        "quant": "Q4_K_M",
-        "size_gb": 2.98,
-        "ability": "视觉理解（图文对话）"
-      },
-      {
-        "name": "qwen2.5:7b",
-        "family": "qwen2",
-        "params": "7.6B",
-        "quant": "Q4_K_M",
-        "size_gb": 4.36,
-        "ability": "文本对话 / 推理"
-      },
-      {
-        "name": "qwen3:4b",
-        "family": "qwen3",
-        "params": "4.0B",
-        "quant": "Q4_K_M",
-        "size_gb": 2.33,
-        "ability": "文本对话 / 推理"
-      },
-      {
-        "name": "llava:7b",
-        "family": "llama",
-        "params": "7B",
-        "quant": "Q4_0",
-        "size_gb": 4.41,
-        "ability": "视觉理解（图文对话）"
-      },
-      {
-        "name": "qwen3:1.7b",
-        "family": "qwen3",
-        "params": "2.0B",
-        "quant": "Q4_K_M",
-        "size_gb": 1.27,
-        "ability": "文本对话 / 推理"
-      }
-    ],
+    "ollama_models": [],
     "ollama_running": [],
     "sd_models": [
       {
@@ -168,7 +119,7 @@
       {
         "port": 11434,
         "service": "Ollama",
-        "open": true
+        "open": false
       },
       {
         "port": 7860,
@@ -188,7 +139,7 @@
     ]
   },
   "remote": {
-    "generated_at": "2026-09-19 09:00:12",
+    "generated_at": "2026-09-20 09:02:16",
     "rows": [
       {
         "ch": "火山方舟",
@@ -503,7 +454,7 @@
           "desc": "账单已出具"
         }
       ],
-      "error": ""
+      "error": "（余额沿用上次结果）"
     },
     "full_keys": false
   },
