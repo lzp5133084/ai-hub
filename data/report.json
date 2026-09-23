@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-09-21 09:00:15",
-  "local_generated_at": "2026-09-21 09:00:03",
-  "remote_generated_at": "2026-09-21 09:00:15",
+  "generated_at": "2026-09-23 09:00:12",
+  "local_generated_at": "2026-09-23 09:00:04",
+  "remote_generated_at": "2026-09-23 09:00:12",
   "host": "SK-20250627TOPQ",
   "local": {
-    "generated_at": "2026-09-21 09:00:03",
+    "generated_at": "2026-09-23 09:00:04",
     "host": "SK-20250627TOPQ",
     "user": "Administrator",
     "services": [
@@ -16,7 +16,7 @@
         "data": "C:\\Users\\Administrator\\.ollama\\models",
         "endpoint": "http://127.0.0.1:11434",
         "api_base": "http://127.0.0.1:11434/v1（OpenAI 兼容）",
-        "status": "已安装未启动",
+        "status": "运行中",
         "capability": "本地大模型推理：对话 / 补全 / 向量 Embedding / 多模态视觉 / OpenAI 兼容接口",
         "invoke": "ollama run <模型>   或   POST http://127.0.0.1:11434/api/chat",
         "note": "默认端口 11434；提供 /api/chat、/api/generate、/api/embeddings、/v1/* 四类接口"
@@ -74,8 +74,59 @@
         "note": "权重：.cache(0.00GB)、README.md(0.00GB)、wav2lip_gan.pth(0.41GB)；人脸检测 s3fd.pth 已就位"
       }
     ],
-    "ollama_models": [],
-    "ollama_running": [],
+    "ollama_models": [
+      {
+        "name": "moondream:1.8b",
+        "family": "phi2",
+        "params": "1B",
+        "quant": "Q4_0",
+        "size_gb": 1.62,
+        "ability": "视觉理解（图文对话）"
+      },
+      {
+        "name": "qwen2.5vl:3b",
+        "family": "qwen25vl",
+        "params": "3.8B",
+        "quant": "Q4_K_M",
+        "size_gb": 2.98,
+        "ability": "视觉理解（图文对话）"
+      },
+      {
+        "name": "qwen2.5:7b",
+        "family": "qwen2",
+        "params": "7.6B",
+        "quant": "Q4_K_M",
+        "size_gb": 4.36,
+        "ability": "文本对话 / 推理"
+      },
+      {
+        "name": "qwen3:4b",
+        "family": "qwen3",
+        "params": "4.0B",
+        "quant": "Q4_K_M",
+        "size_gb": 2.33,
+        "ability": "文本对话 / 推理"
+      },
+      {
+        "name": "llava:7b",
+        "family": "llama",
+        "params": "7B",
+        "quant": "Q4_0",
+        "size_gb": 4.41,
+        "ability": "视觉理解（图文对话）"
+      },
+      {
+        "name": "qwen3:1.7b",
+        "family": "qwen3",
+        "params": "2.0B",
+        "quant": "Q4_K_M",
+        "size_gb": 1.27,
+        "ability": "文本对话 / 推理"
+      }
+    ],
+    "ollama_running": [
+      "qwen2.5:7b"
+    ],
     "sd_models": [
       {
         "file": "sd15.safetensors",
@@ -119,7 +170,7 @@
       {
         "port": 11434,
         "service": "Ollama",
-        "open": false
+        "open": true
       },
       {
         "port": 7860,
@@ -139,7 +190,7 @@
     ]
   },
   "remote": {
-    "generated_at": "2026-09-21 09:00:15",
+    "generated_at": "2026-09-23 09:00:12",
     "rows": [
       {
         "ch": "火山方舟",
@@ -150,7 +201,7 @@
         "url": "https://console.volcengine.com/ark",
         "note": "资源ID apikey-20260701204241-sdkv9",
         "status": "有效",
-        "detail": "可调用模型 133 个",
+        "detail": "可调用模型 135 个",
         "key_masked": "ark-cc8e7f········-10c62"
       },
       {
@@ -162,7 +213,7 @@
         "url": "https://console.volcengine.com/ark",
         "note": "资源ID apikey-20260701203335-td28z",
         "status": "有效",
-        "detail": "可调用模型 133 个",
+        "detail": "可调用模型 135 个",
         "key_masked": "ark-10b72b········-f3c92"
       },
       {
@@ -174,7 +225,7 @@
         "url": "https://console.volcengine.com/ark",
         "note": "资源ID apikey-20260621235856-sckvz",
         "status": "有效",
-        "detail": "可调用模型 133 个",
+        "detail": "可调用模型 135 个",
         "key_masked": "ark-6af1e5········-d32c8"
       },
       {
@@ -186,7 +237,7 @@
         "url": "https://console.volcengine.com/ark",
         "note": "资源ID apikey-20260620011420-6924t",
         "status": "有效",
-        "detail": "可调用模型 133 个",
+        "detail": "可调用模型 135 个",
         "key_masked": "ark-649e21········-01f78"
       },
       {
@@ -198,7 +249,7 @@
         "url": "https://console.volcengine.com/ark",
         "note": "与上方方舟 key 同账号",
         "status": "有效",
-        "detail": "可调用模型 133 个",
+        "detail": "可调用模型 135 个",
         "key_masked": "4ec412b5-c········1c8de0"
       },
       {
@@ -327,6 +378,7 @@
         "doubao-seed-2-0-mini-260215",
         "doubao-seed-2-0-mini-260428",
         "doubao-seed-2-0-pro-260215",
+        "doubao-seed-2-1-lite-260915",
         "doubao-seed-2-1-pro-260628",
         "doubao-seed-2-1-pro-260915",
         "doubao-seed-2-1-turbo-260628",
@@ -418,6 +470,7 @@
         "doubao-seedream-4-0-250828",
         "doubao-seedream-4-5-251128",
         "doubao-seedream-5-0-260128",
+        "doubao-seedream-5-0-flash-260915",
         "doubao-seedream-5-0-pro-260628"
       ],
       "3D 生成": [
@@ -427,7 +480,7 @@
         "hyper3d-gen2-260112"
       ]
     },
-    "model_count": 133,
+    "model_count": 135,
     "billing": {
       "balance": "45.62",
       "frozen": "0",
