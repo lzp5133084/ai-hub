@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01 09:00:04",
+  "generated_at": "2026-10-02 09:00:04",
   "host": "SK-20250627TOPQ",
   "user": "Administrator",
   "services": [
@@ -119,9 +119,7 @@
       "ability": "文本对话 / 推理"
     }
   ],
-  "ollama_running": [
-    "qwen2.5:7b"
-  ],
+  "ollama_running": [],
   "sd_models": [
     {
       "file": "sd15.safetensors",

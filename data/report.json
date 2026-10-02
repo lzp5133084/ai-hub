@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-01 09:00:11",
-  "local_generated_at": "2026-10-01 09:00:04",
-  "remote_generated_at": "2026-10-01 09:00:11",
+  "generated_at": "2026-10-02 09:00:21",
+  "local_generated_at": "2026-10-02 09:00:04",
+  "remote_generated_at": "2026-10-02 09:00:20",
   "host": "SK-20250627TOPQ",
   "local": {
-    "generated_at": "2026-10-01 09:00:04",
+    "generated_at": "2026-10-02 09:00:04",
     "host": "SK-20250627TOPQ",
     "user": "Administrator",
     "services": [
@@ -124,9 +124,7 @@
         "ability": "文本对话 / 推理"
       }
     ],
-    "ollama_running": [
-      "qwen2.5:7b"
-    ],
+    "ollama_running": [],
     "sd_models": [
       {
         "file": "sd15.safetensors",
@@ -190,7 +188,7 @@
     ]
   },
   "remote": {
-    "generated_at": "2026-10-01 09:00:11",
+    "generated_at": "2026-10-02 09:00:20",
     "rows": [
       {
         "ch": "火山方舟",
