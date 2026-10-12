@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-11 09:00:19",
-  "local_generated_at": "2026-10-11 09:00:04",
-  "remote_generated_at": "2026-10-11 09:00:19",
+  "generated_at": "2026-10-12 09:00:14",
+  "local_generated_at": "2026-10-12 09:00:04",
+  "remote_generated_at": "2026-10-12 09:00:14",
   "host": "SK-20250627TOPQ",
   "local": {
-    "generated_at": "2026-10-11 09:00:04",
+    "generated_at": "2026-10-12 09:00:04",
     "host": "SK-20250627TOPQ",
     "user": "Administrator",
     "services": [
@@ -188,7 +188,7 @@
     ]
   },
   "remote": {
-    "generated_at": "2026-10-11 09:00:19",
+    "generated_at": "2026-10-12 09:00:14",
     "rows": [
       {
         "ch": "火山方舟",
@@ -318,8 +318,8 @@
         "quota": "API 5000 次/小时",
         "url": "https://github.com/settings/tokens",
         "note": "账户 lzp5133084，额度每小时重置",
-        "status": "未验证",
-        "detail": "网络不可达：URLError <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>",
+        "status": "有效",
+        "detail": "API 余量 5000/5000",
         "key_masked": "ghp_6hVhak········3uQqhD"
       }
     ],
