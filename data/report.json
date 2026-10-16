@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-15 09:00:12",
-  "local_generated_at": "2026-10-15 09:00:04",
-  "remote_generated_at": "2026-10-15 09:00:11",
+  "generated_at": "2026-10-16 09:00:10",
+  "local_generated_at": "2026-10-16 09:00:04",
+  "remote_generated_at": "2026-10-16 09:00:10",
   "host": "SK-20250627TOPQ",
   "local": {
-    "generated_at": "2026-10-15 09:00:04",
+    "generated_at": "2026-10-16 09:00:04",
     "host": "SK-20250627TOPQ",
     "user": "Administrator",
     "services": [
@@ -188,7 +188,7 @@
     ]
   },
   "remote": {
-    "generated_at": "2026-10-15 09:00:11",
+    "generated_at": "2026-10-16 09:00:10",
     "rows": [
       {
         "ch": "火山方舟",
@@ -319,7 +319,7 @@
         "url": "https://github.com/settings/tokens",
         "note": "账户 lzp5133084，额度每小时重置",
         "status": "有效",
-        "detail": "API 余量 5000/5000",
+        "detail": "API 余量 4994/5000",
         "key_masked": "ghp_6hVhak········3uQqhD"
       }
     ],
