@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17 09:00:09",
+  "generated_at": "2026-10-18 09:00:09",
   "rows": [
     {
       "ch": "火山方舟",
@@ -291,13 +291,13 @@
   },
   "model_count": 135,
   "billing": {
-    "balance": "43.82",
+    "balance": "-0.87",
     "frozen": "0",
     "credit": "0",
     "months": [
       {
         "period": "2026-10",
-        "amount": "1.80",
+        "amount": "46.49",
         "desc": "账单已出具"
       },
       {
