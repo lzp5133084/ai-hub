@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18 09:00:09",
+  "generated_at": "2026-10-19 09:00:09",
   "rows": [
     {
       "ch": "火山方舟",
@@ -10,7 +10,7 @@
       "url": "https://console.volcengine.com/ark",
       "note": "资源ID apikey-20260701204241-sdkv9",
       "status": "有效",
-      "detail": "可调用模型 135 个",
+      "detail": "可调用模型 136 个",
       "key_masked": "ark-cc8e7f········-10c62"
     },
     {
@@ -22,7 +22,7 @@
       "url": "https://console.volcengine.com/ark",
       "note": "资源ID apikey-20260701203335-td28z",
       "status": "有效",
-      "detail": "可调用模型 135 个",
+      "detail": "可调用模型 136 个",
       "key_masked": "ark-10b72b········-f3c92"
     },
     {
@@ -34,7 +34,7 @@
       "url": "https://console.volcengine.com/ark",
       "note": "资源ID apikey-20260621235856-sckvz",
       "status": "有效",
-      "detail": "可调用模型 135 个",
+      "detail": "可调用模型 136 个",
       "key_masked": "ark-6af1e5········-d32c8"
     },
     {
@@ -46,7 +46,7 @@
       "url": "https://console.volcengine.com/ark",
       "note": "资源ID apikey-20260620011420-6924t",
       "status": "有效",
-      "detail": "可调用模型 135 个",
+      "detail": "可调用模型 136 个",
       "key_masked": "ark-649e21········-01f78"
     },
     {
@@ -58,7 +58,7 @@
       "url": "https://console.volcengine.com/ark",
       "note": "与上方方舟 key 同账号",
       "status": "有效",
-      "detail": "可调用模型 135 个",
+      "detail": "可调用模型 136 个",
       "key_masked": "4ec412b5-c········1c8de0"
     },
     {
@@ -146,6 +146,7 @@
       "deepseek-v3-241226",
       "deepseek-v3-250324",
       "deepseek-v4-1-flash-260910",
+      "deepseek-v4-1-flash-261017",
       "deepseek-v4-flash-260425",
       "deepseek-v4-flash-ga-260731",
       "deepseek-v4-pro-260425",
@@ -289,15 +290,15 @@
       "hyper3d-gen2-260112"
     ]
   },
-  "model_count": 135,
+  "model_count": 136,
   "billing": {
-    "balance": "-0.87",
+    "balance": "97.58",
     "frozen": "0",
     "credit": "0",
     "months": [
       {
         "period": "2026-10",
-        "amount": "46.49",
+        "amount": "48.04",
         "desc": "账单已出具"
       },
       {
