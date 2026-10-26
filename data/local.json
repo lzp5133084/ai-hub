@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25 09:00:04",
+  "generated_at": "2026-10-26 09:00:04",
   "host": "SK-20250627TOPQ",
   "user": "Administrator",
   "services": [
@@ -40,7 +40,7 @@
       "status": "运行中",
       "capability": "离线语音转文字，支持中文，可选 tiny / base / small / medium 精度档",
       "invoke": "D:\\ai-tools\\Python311\\python.exe 转写脚本.py",
-      "note": "可用模型档位：base、medium、small、tiny；缓存目录 C:\\Users\\Administrator\\.cache\\huggingface\\hub"
+      "note": "可用模型档位：base、medium、small、tiny；缓存目录 D:\\ai-tools\\whisper-models"
     },
     {
       "name": "edge-tts",
@@ -119,7 +119,10 @@
       "ability": "文本对话 / 推理"
     }
   ],
-  "ollama_running": [],
+  "ollama_running": [
+    "qwen3:4b",
+    "qwen3:1.7b"
+  ],
   "sd_models": [
     {
       "file": "sd15.safetensors",
