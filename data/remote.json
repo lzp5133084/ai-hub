@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10 09:02:16",
+  "generated_at": "2026-11-11 09:02:16",
   "rows": [
     {
       "ch": "火山方舟",
@@ -130,7 +130,7 @@
       "url": "https://github.com/settings/tokens",
       "note": "账户 lzp5133084，额度每小时重置",
       "status": "有效",
-      "detail": "API 余量 5000/5000",
+      "detail": "API 余量 4955/5000",
       "key_masked": "ghp_6hVhak········3uQqhD"
     }
   ],
@@ -230,7 +230,7 @@
         "desc": "账单已出具"
       }
     ],
-    "error": "（余额沿用上次结果）"
+    "error": "（余额沿用上次结果）（余额沿用上次结果）"
   },
   "full_keys": false
 }
