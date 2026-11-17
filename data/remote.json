@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16 09:00:17",
+  "generated_at": "2026-11-17 09:00:11",
   "rows": [
     {
       "ch": "火山方舟",
@@ -130,7 +130,7 @@
       "url": "https://github.com/settings/tokens",
       "note": "账户 lzp5133084，额度每小时重置",
       "status": "有效",
-      "detail": "API 余量 4802/5000",
+      "detail": "API 余量 4999/5000",
       "key_masked": "ghp_6hVhak········3uQqhD"
     }
   ],
