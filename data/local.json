@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17 09:00:04",
+  "generated_at": "2026-11-18 09:00:04",
   "host": "SK-20250627TOPQ",
   "user": "Administrator",
   "services": [
@@ -11,7 +11,7 @@
       "data": "C:\\Users\\Administrator\\.ollama\\models",
       "endpoint": "http://127.0.0.1:11434",
       "api_base": "http://127.0.0.1:11434/v1（OpenAI 兼容）",
-      "status": "已安装未启动",
+      "status": "运行中",
       "capability": "本地大模型推理：对话 / 补全 / 向量 Embedding / 多模态视觉 / OpenAI 兼容接口",
       "invoke": "ollama run <模型>   或   POST http://127.0.0.1:11434/api/chat",
       "note": "默认端口 11434；提供 /api/chat、/api/generate、/api/embeddings、/v1/* 四类接口"
@@ -69,8 +69,19 @@
       "note": "权重：.cache(0.00GB)、README.md(0.00GB)、wav2lip_gan.pth(0.41GB)；人脸检测 s3fd.pth 已就位"
     }
   ],
-  "ollama_models": [],
-  "ollama_running": [],
+  "ollama_models": [
+    {
+      "name": "qwen3:8b",
+      "family": "qwen3",
+      "params": "8.2B",
+      "quant": "Q4_K_M",
+      "size_gb": 4.87,
+      "ability": "文本对话 / 推理"
+    }
+  ],
+  "ollama_running": [
+    "qwen3:8b"
+  ],
   "sd_models": [
     {
       "file": "sd15.safetensors",
@@ -114,7 +125,7 @@
     {
       "port": 11434,
       "service": "Ollama",
-      "open": false
+      "open": true
     },
     {
       "port": 7860,
