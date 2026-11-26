@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-25 09:00:35",
-  "local_generated_at": "2026-11-25 09:00:05",
-  "remote_generated_at": "2026-11-25 09:00:35",
+  "generated_at": "2026-11-26 09:00:21",
+  "local_generated_at": "2026-11-26 09:00:04",
+  "remote_generated_at": "2026-11-26 09:00:21",
   "host": "SK-20250627TOPQ",
   "local": {
-    "generated_at": "2026-11-25 09:00:05",
+    "generated_at": "2026-11-26 09:00:04",
     "host": "SK-20250627TOPQ",
     "user": "Administrator",
     "services": [
@@ -139,7 +139,7 @@
     ]
   },
   "remote": {
-    "generated_at": "2026-11-25 09:00:35",
+    "generated_at": "2026-11-26 09:00:21",
     "rows": [
       {
         "ch": "火山方舟",
